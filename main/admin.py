@@ -1,3 +1,21 @@
 from django.contrib import admin
+from .models import Category, Service, ServiceImage
 
-# Register your models here.
+class ServiceImageInline(admin.TabularInline):
+    model = ServiceImage
+    extra = 1
+class ServiceAdmin(admin.ModelAdmin):
+    list_display = ['name', 'category', 'price']
+    list_filter = ['category']
+    search_fields = ['name', 'description']
+    prepopulated_fields = {'slug': ('name',)}
+    inlines = [ServiceImageInline]
+
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ['name', 'slug']
+    prepopulated_fields = {'slug': ('name',)}
+    
+
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(Service, ServiceAdmin)
