@@ -1,0 +1,41 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+
+
+<section class="cat-section">
+    <h1 class="cat-title">Выберите категорию</h1>
+    <div class="categories">
+        {% for category in categories %}
+        <div class="category-card">
+            <a href="?category={{ category.slug }}"
+                class="cat-link {% if selected_category == category.slug %}active{% endif %}">
+                <div class="cat-img">
+                <img src="{{ category.category_image.url }}" alt="{{ category.name }}" class="category-image">
+                </div>
+                <h3 class="cat-name">{{ category.name }}</h3>
+                
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+
+<section>
+    <h1 class="cat-title">Услуги</h1>
+
+
+
+
+</section>
+
+
+
+
+
+
+
+{% endblock %}
