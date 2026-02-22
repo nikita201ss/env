@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
 
-    <title>{% block title %}Home{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
 
 </head>
 
@@ -22,7 +22,7 @@
         <nav>
             <ul class="list">
                 <li><a href="{% url 'main:index' %}">Главная</a></li>
-                <li><a href="#">О нас</a></li>
+                <li><a href="{% url 'main:about' %}">О нас</a></li>
                 <li><a href="#">Информация для заказчиков</a></li>
                 <li><a href="#">Информация для исполнителей</a></li>
                 <li><a href="#">Предоставить услугу</a></li>
@@ -32,14 +32,14 @@
     <div class="panel">
         <div>
             <div>
-                <a href="{% url 'main:index' %}"><img src="{% static 'img/LOGO.svg' %}" alt="logo"></a>
+                <a href="{% url 'main:index' %}"><img src="{% static 'icon/LOGO.svg' %}" alt="logo"></a>
             </div>
         </div>
 
 
         <form class="search-panel" action="{% url 'main:index' %}" method="get">
             <input  class="search-input" type="text" name="q" placeholder="Поиск услуг" value="{{ search_query }}">
-            <button type="submit" class="icon-search"><img src="{% static 'img/search.svg' %}" alt="search"></button>
+            <button type="submit" class="icon-search"><img src="{% static 'icon/search.svg' %}" alt="search"></button>
         </form>
 
 
@@ -62,7 +62,7 @@
     <footer>
 
         <div>
-            <img src="{% static 'img/LOGO-white.svg' %}" alt="logo">
+            <img src="{% static 'icon/LOGO-white.svg' %}" alt="logo">
         </div>
         <div class="foot-blocks">
             <div class="block">

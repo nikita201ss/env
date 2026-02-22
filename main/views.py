@@ -63,4 +63,5 @@ class ServiceDetailView(DetailView):
     
 
 
-    
+class AboutView(TemplateView):
+    template_name = 'main/about.html'

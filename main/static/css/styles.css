@@ -10,6 +10,10 @@ a {
     text-decoration: none;
 }
 
+h1 {
+    font-weight: 600;
+}
+
 header {
     font-size: 24px;
     align-items: center;
@@ -150,7 +154,7 @@ footer {
 }
 
 .category-image {
-        height: 60px;
+    height: 60px;
 }
 
 .categories {
@@ -161,11 +165,13 @@ footer {
     margin: 0 auto;
 }
 
-.cat-title {
+.cat-title,
+.about-title {
     margin: 0 0 30px 132px;
 }
 
 .cat-name {
+    font-weight: 500;
     justify-content: center;
     width: 70%;
     display: flex;
@@ -241,4 +247,56 @@ footer {
     width: 70%;
     flex-wrap: wrap;
     margin: 0 auto;
+}
+
+
+.page-about {
+    font-size: 24px;
+}
+
+.about-text {
+    line-height: 2;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.about-text>p {
+    line-height: 2;
+}
+
+.about-list>ul>li {
+    line-height: 2;
+    list-style: circle;
+}
+
+.about-card {
+    border-radius: 20px;
+    display: flex;
+    width: 15%;
+    border: 3px solid #3AAFAA;
+    justify-content: center;
+    flex-direction: column;
+    height: 357px;
+}
+
+.about-cards {
+    margin-top: 50px;
+    display: flex;
+    gap: 3%;
+    justify-content: center;
+}
+
+.about-image {
+    display: flex;
+    justify-content: center;
+}
+
+.about-card-txt {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.why {
+    margin: 25px 0;
 }
