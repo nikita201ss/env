@@ -41,13 +41,16 @@ class Service(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    city = models.CharField(max_length=100, blank=True, verbose_name="Город")
+    address = models.CharField(max_length=255, blank=True, verbose_name="Адрес")
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
 
             original_slug = self.slug
             counter = 1
-            while Category.objects.filter(slug=self.slug).exists():
+            while Service.objects.filter(slug=self.slug).exists():
                 self.slug = f"{original_slug}-{counter}"
                 counter += 1
         super().save(*args, **kwargs)
@@ -55,6 +58,16 @@ class Service(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def get_location(self):
+        if hasattr(self, 'city') and hasattr(self, 'address'):
+            if self.city and self.address:
+                return f"{self.city}, {self.address}"
+            elif self.city:
+                return self.city
+            elif self.address:
+                return self.address
+        return self.location if hasattr(self, 'location') else ""
     
 
 class ServiceImage(models.Model):

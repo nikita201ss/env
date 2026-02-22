@@ -3,9 +3,9 @@
 {% block title %}Главная страница{% endblock %}
 
 {% block content %}
+{% load static %}
 
-
-<section class="cat-section">
+<div class="cat-section">
     <h1 class="cat-title">Выберите категорию</h1>
     <div class="categories">
         {% for category in categories %}
@@ -13,24 +13,74 @@
             <a href="?category={{ category.slug }}"
                 class="cat-link {% if selected_category == category.slug %}active{% endif %}">
                 <div class="cat-img">
-                <img src="{{ category.category_image.url }}" alt="{{ category.name }}" class="category-image">
+                    <img src="{{ category.category_image.url }}" alt="{{ category.name }}" class="category-image">
                 </div>
                 <h3 class="cat-name">{{ category.name }}</h3>
-                
+
             </a>
         </div>
         {% endfor %}
     </div>
-</section>
+</div>
 
 
-<section>
-    <h1 class="cat-title">Услуги</h1>
-
+<div>
 
 
 
-</section>
+    <div class="cat-title"> {% if selected_category %}
+        <h1>Услуги в категории</h1>
+        <span class="services-count">Найдено: {{ services|length }}</span> 
+        <a href="{% url 'main:index' %}" class="btn-reset">Сбросить</a>
+        {% for category in categories %}
+            {% if cat.slug == selected_category %}{
+                { category.name }
+            }
+        
+            {% endif %}
+        {% endfor %}
+        {% else %}
+            <h1>Все услуги</h1>
+        {% endif %}
+    </div>
+
+    <div class="services">
+        {% for service in services %}
+        
+            <div class="service">
+            <a href="{% url 'main:service_detail' service.slug %}" class="ser-link">
+            <div class="service-img">
+                <img src="{{ service.main_image.url }}" alt="image" class="service-image">
+            </div>
+
+            <div class="service-txt">
+                <p>{{ service.name }}</p>
+                <h4>{{ service.price }} руб.</h4>
+                <div class="location">
+                    <img src="{% static 'img/pin.svg' %}" alt="pin" class="pin">  
+                    <p>{{ service.city }}</p>            
+                </div>
+                
+            </div>
+            </a>
+        </div>
+        {% endfor %}
+
+
+
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+</div>
 
 
 

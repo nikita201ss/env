@@ -5,9 +5,9 @@ class ServiceImageInline(admin.TabularInline):
     model = ServiceImage
     extra = 1
 class ServiceAdmin(admin.ModelAdmin):
-    list_display = ['name', 'category', 'price']
-    list_filter = ['category']
-    search_fields = ['name', 'description']
+    list_display = ['name', 'category', 'city', 'price']
+    list_filter = ['category', 'city']
+    search_fields = ['name', 'description', 'city', 'address']
     prepopulated_fields = {'slug': ('name',)}
     inlines = [ServiceImageInline]
 

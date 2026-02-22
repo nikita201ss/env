@@ -61,3 +61,6 @@ class ServiceDetailView(DetailView):
         context['current_category'] = service.category.slug
         return context
     
+
+
+    
