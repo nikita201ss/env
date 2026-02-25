@@ -1,14 +1,128 @@
 {% extends 'main/base.html' %}
 
-{% block title %}Главная страница{% endblock %}
+{% block title %}{{ service.name }}{% endblock %}
 
 {% block content %}
+{% load static %}
 
 
-awdaw
+<div>
+
+    <div class="way">
+        <a href="{% url 'main:index' %}">Главная</a>
+        <p>></p>
+        <a href="{% url 'main:index' %}?category={{ service.category.slug }}">{{ service.category.name|upper }}</a>
+        <p>></p>
+        <span class="current">{{ service.name|upper }}</span>
+    </div>
+
+    <div class="sectors">
+        <div class="images-detail">
+            {% if service.main_image.url %}
+            <div class="det-img">
+                <img id="mainImage" 
+                    src="{{ service.main_image.url }}"
+                    alt="image-service" 
+                    class="detail-img">
+            </div>
+            {% else %}
+            <div>
+                <p>Изображение отсутствует</p>
+            </div>
+            {% endif %}
+
+            {% if service.images.all or service.main_image %}
+            <div class="extra-images">
+                {% if service.main_image %}
+                <img src="{{ service.main_image.url }}" 
+                     alt="Главное" 
+                     class="extra-img"
+                     onclick="changeImage(this.src)">
+                {% endif %}
+
+                {% for image in service.images.all %}
+                <img src="{{ image.image.url }}" 
+                     alt="{{ service.name }}" 
+                     class="extra-img"
+                     onclick="changeImage(this.src)">
+                {% endfor %}
+            </div>
+            {% endif %}
+
+
+            <div class="location2">
+                <img src="{% static 'icon/pin.svg' %}" alt="pin" class="pin">
+                <div>
+                    <p>{{ service.city }}</p>
+                    <p>{{ service.address }}</p>
+                </div>
+            </div>
+
+            <div class="phone-button" data-phone="{{ service.phone_number }}">
+                <p class="phone-text">Увидеть номер</p>
+            </div>
+
+        </div>
+
+        <div class="description">
+            <h2>{{ service.name }}</h2>
+
+            <p>{{ service.price }} руб.</p>
+
+            <p>Описание</p>
+
+            <div class="detail-txt">{{ service.description|linebreaks }}</div>
+
+
+        </div>
 
 
 
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+    {% if related_services %}
+    <div class="related-services">
+        <h2 class="related-title">Похожие услуги</h2>
+        <div class="services">
+            {% for related in related_services %}
+            <div class="service">
+                <a href="{% url 'main:service_detail' related.slug %}" class="ser-link">
+                    
+                    {% if related.main_image %}
+                    <div class="service-img">
+                        <img src="{{ related.main_image.url }}" alt="{{ related.name }}" class="service-image">
+                    </div>
+
+                    {% endif %}
+                    <div class="service-txt">
+                        <p>{{ related.name|truncatechars:50 }}</p>
+                        <h4>{{ related.price }} руб.</h4>
+                        <div class="location">
+                            <img src="{% static 'icon/pin.svg' %}" alt="pin" class="pin">
+                            <p>{{ related.city }}</p>
+                        </div>
+
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+
+
+</div>
 
 
 {% endblock %}
