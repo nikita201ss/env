@@ -1,9 +1,10 @@
-from django.shortcuts import get_object_or_404
-from django.views.generic import TemplateView, DetailView
-from .models import Category, Service
+from django.shortcuts import render, redirect
+from django.views.generic import TemplateView, DetailView, CreateView
+from django.urls import reverse_lazy
+from .models import Category, Service, ServiceImage
 from django.db.models import Q
-
-
+from django.contrib import messages
+from .forms import ServiceForm
 
 class IndexView(TemplateView):
     
@@ -65,3 +66,45 @@ class ServiceDetailView(DetailView):
 
 class AboutView(TemplateView):
     template_name = 'main/about.html'
+
+
+
+def service_create_view(request):
+    if request.method == 'POST':
+        form = ServiceForm(request.POST, request.FILES)
+        
+        if form.is_valid():
+            service = form.save(commit=False)
+            
+            from django.utils.text import slugify
+            service.slug = slugify(service.name)
+            
+            original_slug = service.slug
+            counter = 1
+            while Service.objects.filter(slug=service.slug).exists():
+                service.slug = f"{original_slug}-{counter}"
+                counter += 1
+            
+            service.save()
+            
+            form.save_m2m()
+            
+            images = request.FILES.getlist('extra_images')
+            for image in images:
+                ServiceImage.objects.create(service=service, image=image)
+            
+            messages.success(request, 'Услуга успешно добавлена!')
+            return redirect('main:index')
+        else:
+            messages.error(request, 'Пожалуйста, исправьте ошибки в форме')
+    else:
+        form = ServiceForm()
+    
+    categories = Category.objects.all()
+    
+    return render(request, 'main/service_create.html', {
+        'form': form,
+        'categories': categories,
+    })
+
+

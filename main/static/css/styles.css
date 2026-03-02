@@ -409,3 +409,91 @@ footer {
 .phone-text {
     font-size: 20px;
 }
+
+
+/* -------------------- */
+
+.service-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.field {
+    border-radius: 20px;
+    height: 675px;
+    justify-content: center;
+    background-color: #DFF2F0;
+    width: 70%;
+    display: flex;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    padding: 30px;
+}
+
+.posit {
+    height: 85%;
+    display: flex;
+    gap: 5%;
+    width: 100%;
+    justify-content: center;
+}
+
+.group {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-create {
+    font-size: 20px;
+    color: white;
+    background-color: #2A7A78;
+    width: 237px;
+    display: flex;
+    height: 58px;
+    border: 0;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
+.form-control {
+    border: 0;
+    padding-left: 3%;
+    border-radius: 10px;
+    height: 30px;
+    outline: none;
+    margin-top: 8px;
+}
+
+.form-control-desc {
+    border: 0;
+    padding-left: 3%;
+    border-radius: 10px;
+    height: 60px;
+    outline: none;
+    margin-top: 8px;
+}
+
+.form-control-file {
+        margin-top: 8px;
+
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 5%;
+}
+
+.form-actions {
+    height: 15px;
+}
+
+
+.messages {
+    margin: 40px 0;
+    display: flex;
+    justify-content: center;
+}

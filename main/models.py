@@ -27,7 +27,7 @@ class Category(models.Model):
             verbose_name_plural = 'Categories'
 
 class Service(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=40)
     slug = models.SlugField(max_length=100, unique=True)
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name="services"
