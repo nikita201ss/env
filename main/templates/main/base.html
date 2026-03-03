@@ -25,7 +25,10 @@
                 <li><a href="{% url 'main:about' %}">О нас</a></li>
                 <li><a href="#">Информация для заказчиков</a></li>
                 <li><a href="#">Информация для исполнителей</a></li>
+                {% if user.is_authenticated %}
                 <li><a href="{% url 'main:service_create' %}">Предоставить услугу</a></li>
+                {% endif %}
+            
             </ul>
         </nav>
     </header>
@@ -38,21 +41,36 @@
 
 
         <form class="search-panel" action="{% url 'main:index' %}" method="get">
-            <input  class="search-input" type="text" name="q" placeholder="Поиск услуг" value="{{ search_query }}">
+            <input class="search-input" type="text" name="q" placeholder="Поиск услуг" value="{{ search_query }}">
             <button type="submit" class="icon-search"><img src="{% static 'icon/search.svg' %}" alt="search"></button>
         </form>
 
 
+        {% if user.is_authenticated %}
+
+        <div class="buts-auth">
+            <div class="but-login">
+                <p>{{ user.username }}</p>
+            </div>
+            <div class="but_reg">
+                <a href="{% url 'users:logout' %}">Выйти</a>
+            </div>
+        </div>
+        {% else %}
 
 
         <div class="buts-auth">
             <div class="but-login">
-                <p>Вход</p>
+                <a href="{% url 'users:login' %}">Вход</a>
             </div>
             <div class="but_reg">
-                <p>Регистрация</p>
+                <a href="{% url 'users:register' %}">Регистрация</a>
             </div>
         </div>
+        {% endif %}
+
+
+
     </div>
 
     {% block content %}
@@ -101,7 +119,7 @@
 
 
 
-<script src="{% static 'scripts/service-detail.js' %}"></script>
+    <script src="{% static 'scripts/service-detail.js' %}"></script>
 
 </body>
 

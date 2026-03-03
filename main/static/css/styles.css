@@ -6,8 +6,9 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-a {
+a, a:active {
     text-decoration: none;
+    color: black;
 }
 
 h1 {
@@ -477,7 +478,7 @@ footer {
 }
 
 .form-control-file {
-        margin-top: 8px;
+    margin-top: 8px;
 
 }
 
@@ -496,4 +497,80 @@ footer {
     margin: 40px 0;
     display: flex;
     justify-content: center;
+}
+
+
+.window {
+    -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    width: 650px;
+    height: 540px;
+    border-radius: 10px;
+    margin: 0 auto;
+    display: flex;
+}
+
+
+.form-reg,
+.form-log {
+    font-size: 18px;
+    width: 85%;
+    border: 1px solid black;
+    padding-left: 2%;
+    border-radius: 20px;
+    height: 50px;
+    outline: none;
+    margin-top: 8px;
+}
+
+
+.forma {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6%;
+}
+
+.title-win {
+    font-size: 20px;
+}
+
+.auth-links {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.btn-submit {
+    cursor: pointer;
+    background-color: #DFF2F0;
+    border: 0;
+    border-radius: 14px;
+    font-size: 24px;
+    width: 60%;
+    height: 68px;
+}
+
+.group-auth {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    margin: 5% 0 0 5%;
+}
+
+.btn-auth {
+    display: flex;
+    justify-content: center;
+}
+
+
+.window-reg {
+    -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    width: 650px;
+    height: 680px;
+    border-radius: 10px;
+    margin: 0 auto;
+    display: flex;
 }

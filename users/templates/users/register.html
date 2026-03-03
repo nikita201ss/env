@@ -1,0 +1,93 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+{% load static %}
+
+
+
+<div>
+
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+
+
+    <div class="window-reg">
+        <form method="post" class="forma">
+            {% csrf_token %}
+
+            <div>
+                <div class="group-auth">
+                    <label for="{{ form.username.id_for_label }}" class="title-win">{{ form.username.label }}</label>
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                    <div class="error">
+                        {% for error in form.username.errors %}
+                        <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+
+
+                <div class="group-auth">
+                    <label for="{{ form.password1.id_for_label }} " class="title-win">{{ form.password1.label }}</label>
+                    {{ form.password1 }}
+                    {% if form.password1.errors %}
+                    <div class="error">
+                        {% for error in form.password1.errors %}
+                        <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    <p>Пароль должен содержать минимум 8 символов</p>
+                </div>
+
+                
+                <div class="group-auth">
+                    <label for="{{ form.password2.id_for_label }} " class="title-win">{{ form.password2.label }}</label>
+                    {{ form.password2 }}
+                    {% if form.password2.errors %}
+                    <div class="error">
+                        {% for error in form.password2.errors %}
+                        <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+
+
+            </div>
+
+
+            <div class="btn-auth">
+                <button type="submit" class="btn-submit">Зарегистрироваться</button>
+            </div>
+
+
+
+
+            <div class="auth-links">
+                <p>Уже есть аккаунт? <br><b><a href="{% url 'users:login' %}">Войти</a></b></p>
+            </div>
+
+
+
+        </form>
+    </div>
+
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+{% load static %}
+
+
+
+<div>
+
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+
+
+    <div class="window">
+        <form method="post" class="forma">
+            {% csrf_token %}
+
+            <div>
+                <div class="group-auth">
+                    <label for="{{ form.username.id_for_label }}" class="title-win">{{ form.username.label }}</label>
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                    <div class="error">
+                        {% for error in form.username.errors %}
+                        <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+
+
+                <div class="group-auth">
+                    <label for="{{ form.password.id_for_label }} " class="title-win">{{ form.password.label }}</label>
+                    {{ form.password }}
+                    {% if form.password.errors %}
+                    <div class="error">
+                        {% for error in form.password.errors %}
+                        <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+
+            <div class="btn-auth">
+                <button type="submit" class="btn-submit">Войти</button>
+            </div>
+
+
+
+
+            <div class="auth-links">
+                <p>Нет аккаунта? <br><b><a href="{% url 'users:register' %}">Зарегистрироваться</a></b></p>
+            </div>
+
+
+
+        </form>
+    </div>
+
+
+
+</div>
+
+{% endblock %}
