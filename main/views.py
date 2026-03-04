@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, DetailView, CreateView
+from django.views.generic import TemplateView, DetailView
 from django.urls import reverse_lazy
 from .models import Category, Service, ServiceImage
 from django.db.models import Q

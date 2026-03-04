@@ -1,11 +1,23 @@
 from django.db import models
 from django.utils.text import slugify
+from django.core.exceptions import ValidationError
 
+def validate_file_size(file):
+    limit = 10 * 1024 * 1024
+    
+    if file.size > limit:
+        raise ValidationError(
+            f'Размер файла не должен превышать 10 МБ. '
+            f'Текущий размер: {file.size / (1024 * 1024):.1f} МБ'
+        )
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, unique=True)
-    category_image = models.ImageField(upload_to='category')
+    category_image = models.ImageField(
+        upload_to='category',
+        validators=[validate_file_size]
+    )
 
 
     def save(self, *args, **kwargs):
@@ -27,8 +39,21 @@ class Category(models.Model):
             verbose_name_plural = 'Categories'
 
 class Service(models.Model):
+
+    main_image = models.ImageField(
+        upload_to='services/main/',
+        validators=[validate_file_size]
+    )
+
+
     name = models.CharField(max_length=40)
+    
+
     slug = models.SlugField(max_length=100, unique=True)
+
+
+
+
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name="services"
     )
@@ -37,7 +62,7 @@ class Service(models.Model):
 
     price = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField(blank=True)
-    main_image = models.ImageField(upload_to='services/main/')
+    
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -72,4 +97,7 @@ class Service(models.Model):
 
 class ServiceImage(models.Model):
     service = models.ForeignKey(Service, on_delete=models.CASCADE,  related_name='images')
-    image = models.ImageField(upload_to='services/extra/')
+    image = models.ImageField(
+    upload_to='services/extra/',
+    validators=[validate_file_size]
+    )

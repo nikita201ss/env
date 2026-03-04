@@ -31,9 +31,6 @@ class RegistrationForm(UserCreationForm):
 
 
 
-
-
-
 class LoginForm(forms.Form):
     username = forms.CharField(
         label='Логин',
@@ -49,3 +46,5 @@ class LoginForm(forms.Form):
             'placeholder': 'Введите пароль'
         })
     )
+
+    

@@ -15,7 +15,6 @@ def register_view(request):
             messages.error(request, 'Исправьте ошибки в форме')
     else:
         form = RegistrationForm()
-    
     return render(request, 'users/register.html', {'form': form})
 
 def login_view(request):
