@@ -45,7 +45,7 @@
 
 8. Создаём суперпользователя
   ```
-  python manage.py migrate
+  python manage.py createsuperuser
   ```
     
 10. Запуск проекта
